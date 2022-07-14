@@ -33,6 +33,35 @@ public class SingleLinkedList<T> {
         }
     }
 
+
+    public Node<T> search(T data) {
+        if (this.head == null) {
+            return null;
+        } else {
+            Node<T> node = this.head;
+            while (node != null) {
+                if (node.data == data) {
+                    return node;
+                } else {
+                    node = node.next;
+                }
+            }
+            return null;
+        }
+    }
+
+    public void addNodeInside(T data, T isData) { // T data : 내가 가진 데이터 , T isData : 그 앞 노드가 가지고 있는 데이터
+        Node<T> serchedNode = this.search(isData);
+
+        if (serchedNode == null) {
+            this.addNode(data);
+        } else {
+            Node<T> nextNode = serchedNode.next;
+            serchedNode.next = new Node<T>(data);
+            serchedNode.next.next = nextNode;
+        }
+    }
+
 }
 
 class Main {
@@ -41,6 +70,11 @@ class Main {
         myLinkedList.addNode(1);
         myLinkedList.addNode(2);
         myLinkedList.addNode(3);
+
         myLinkedList.printAll();
+
+        myLinkedList.addNodeInside(5, 1);
+        myLinkedList.printAll();
+
     }
 }
