@@ -62,6 +62,27 @@ public class SingleLinkedList<T> {
         }
     }
 
+    public boolean delNode(T isData) {
+        if (this.head == null) {
+            return false;
+        } else {
+            Node<T> node = this.head;
+            if (node.data == isData) {
+                this.head = this.head.next;
+                return true;
+            } else {
+                while (node.next != null) {
+                    if (node.next.data == isData) {
+                        node.next = node.next.next;
+                        return true;
+                    }
+                    node = node.next;
+                }
+                return false;
+            }
+        }
+    }
+
 }
 
 class Main {
@@ -70,10 +91,13 @@ class Main {
         myLinkedList.addNode(1);
         myLinkedList.addNode(2);
         myLinkedList.addNode(3);
-
+        myLinkedList.addNode(4);
+        myLinkedList.addNode(5);
         myLinkedList.printAll();
 
-        myLinkedList.addNodeInside(5, 1);
+        System.out.println("-------------------");
+
+        myLinkedList.delNode(3);
         myLinkedList.printAll();
 
     }
