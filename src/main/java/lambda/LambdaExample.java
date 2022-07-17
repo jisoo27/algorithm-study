@@ -9,11 +9,11 @@ import static lambda.Color.RED;
 
 public class LambdaExample {
 
-    public static List<Apple> filterGreenApples(List<Apple> inventory, Color color) {
+    public static List<Apple> filterApples(List<Apple> inventory, Color color, int weight, boolean flag) {
         List<Apple> result = new ArrayList<>();
 
         for (Apple apple : inventory) {
-            if (apple.getColor().equals(color)) {
+            if ((flag && apple.getColor().equals(color)) || (!flag && apple.getWeight() > weight)) {
                 result.add(apple);
             }
         }
@@ -21,9 +21,9 @@ public class LambdaExample {
     }
 
     public static void main(String[] args) {
-        List<Apple> inventory = Arrays.asList(new Apple(GREEN), new Apple(RED), new Apple(GREEN));
+        List<Apple> inventory = Arrays.asList(new Apple(GREEN, 80), new Apple(RED, 100), new Apple(GREEN, 150));
 
-        List<Apple> grrenApples = filterGreenApples(inventory, GREEN);
-        List<Apple> RedApples = filterGreenApples(inventory, RED);
+        List<Apple> greenApples = filterApples(inventory, GREEN, 0, true);
+        List<Apple> redApples = filterApples(inventory, null, 150, false);
     }
 }
