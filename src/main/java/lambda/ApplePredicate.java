@@ -1,5 +1,5 @@
 package lambda;
 
-public interface ApplePredicate {
-    boolean test (Apple apple);
+interface Predicate<T> {
+    boolean test (T t);
 }
