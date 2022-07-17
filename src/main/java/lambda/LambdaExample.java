@@ -22,12 +22,7 @@ public class LambdaExample {
 
     public static void main(String[] args) {
         List<Apple> inventory = Arrays.asList(new Apple(GREEN, 80), new Apple(RED, 100), new Apple(GREEN, 150));
+        List<Apple> result = filterApples(inventory, (Apple apple) -> RED.equals(apple.getColor()));
 
-        List<Apple> redApples = filterApples(inventory, new ApplePredicate() { // filterApples 메서드의 동작을 직접 파라미터화
-            @Override
-            public boolean test(Apple apple) {
-                return RED.equals(apple.getColor());
-            }
-        });
     }
 }
