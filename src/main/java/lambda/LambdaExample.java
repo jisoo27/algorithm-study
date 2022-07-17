@@ -9,11 +9,11 @@ import static lambda.Color.RED;
 
 public class LambdaExample {
 
-    public static List<Apple> filterApples(List<Apple> inventory, Color color, int weight, boolean flag) {
+    public static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
         List<Apple> result = new ArrayList<>();
 
         for (Apple apple : inventory) {
-            if ((flag && apple.getColor().equals(color)) || (!flag && apple.getWeight() > weight)) {
+            if (p.test(apple)) { // predicate 객체로 사과 검사 조건을 캡슐화
                 result.add(apple);
             }
         }
@@ -23,7 +23,6 @@ public class LambdaExample {
     public static void main(String[] args) {
         List<Apple> inventory = Arrays.asList(new Apple(GREEN, 80), new Apple(RED, 100), new Apple(GREEN, 150));
 
-        List<Apple> greenApples = filterApples(inventory, GREEN, 0, true);
-        List<Apple> redApples = filterApples(inventory, null, 150, false);
+        List<Apple> redAndHeavyApples = filterApples(inventory, new AppleRedAndHeavyPredicate());
     }
 }
